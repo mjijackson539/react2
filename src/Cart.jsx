@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "./CartContext";
 
 export default function Cart() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -15,6 +15,14 @@ export default function Cart() {
           {cart.map((item, index) => (
             <li key={index} style={{ marginBottom: "10px" }}>
               {item.name} - {item.price} ₽
+
+              <button
+                onClick={() => addToCart(item)}
+                style={{ marginLeft: "10px" }}
+              >
+                Ещё один
+              </button>
+
               <button
                 onClick={() => removeFromCart(index)}
                 style={{ marginLeft: "10px" }}
